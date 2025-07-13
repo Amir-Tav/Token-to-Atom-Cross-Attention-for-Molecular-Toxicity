@@ -1,0 +1,71 @@
+acidic_group:
+  id: "ChEBI:30879"
+  source: "ChEBI"
+  description: "Acidic groups like carboxylic acids can cause GI mucosal irritation."
+  note: "Common in NSAIDs such as diclofenac and aspirin."
+
+arylacetic_core:
+  id: "MeSH:D000894"
+  source: "MeSH"
+  description: "Arylacetic acids inhibit prostaglandin synthesis, leading to GI risk."
+  note: "Structurally related to several nonsteroidal anti-inflammatory drugs."
+
+glucocorticoid_core:
+  id: "MeSH:D005938"
+  source: "MeSH"
+  description: "Glucocorticoid scaffolds suppress immune response and raise infection risk."
+  note: "Backbone of drugs like prednisolone and dexamethasone."
+
+beta_lactam_ring:
+  id: "ChEBI:35627"
+  source: "ChEBI"
+  description: "Beta-lactam rings are hallmark structures in many antimicrobial agents."
+  note: "Present in penicillin, amoxicillin, and cephalosporins."
+
+aminoglycoside_sugar:
+  id: "MeSH:D000640"
+  source: "MeSH"
+  description: "Aminoglycosides disrupt bacterial ribosome function."
+  note: "Includes streptomycin, gentamicin, and related antibiotics."
+
+macrolide_lactone:
+  id: "MeSH:D008273"
+  source: "MeSH"
+  description: "Macrolide antibiotics inhibit bacterial protein synthesis."
+  note: "Core structure in erythromycin and azithromycin."
+
+aromatic_amine:
+  id: "MeSH:D000608"
+  source: "MeSH"
+  description: "Aromatic amines often act on CNS pathways and transporters."
+  note: "Seen in many neuroactive drugs including stimulants and antidepressants."
+
+trifluoromethyl:
+  id: "ChEBI:51112"
+  source: "ChEBI"
+  description: "This group enhances blood-brain barrier penetration and metabolic stability."
+  note: "Enhances CNS drug potency; used in fluoxetine and similar agents."
+
+piperazine_ring:
+  id: "MeSH:D011601"
+  source: "MeSH"
+  description: "Often used in antipsychotic and neuroactive drugs."
+  note: "Seen in compounds like buspirone and some SSRIs."
+
+catechol_motif:
+  id: "ChEBI:33567"
+  source: "ChEBI"
+  description: "Catechol motifs interact with dopamine and adrenergic systems."
+  note: "Core to neurotransmitters and neuro-stimulants."
+
+imidazole_ring:
+  id: "MeSH:D007104"
+  source: "MeSH"
+  description: "Found in antifungals and histamine-modulating agents."
+  note: "Key motif in drugs like ketoconazole and cimetidine."
+
+sulfonamide_group:
+  id: "ChEBI:35358"
+  source: "ChEBI"
+  description: "Sulfonamides act as competitive enzyme inhibitors in microbes."
+  note: "Widespread in early antimicrobials; also causes hypersensitivity."

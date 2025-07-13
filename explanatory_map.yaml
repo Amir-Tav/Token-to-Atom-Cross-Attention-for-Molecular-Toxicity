@@ -1,0 +1,66 @@
+# Twelve exemplar drugs (4 per SOC) with biologically grounded rationales
+Gastrointestinal:
+  Diclofenac:
+    key_features: [acidic_group, pKa_4to5, arylacetic_core]
+    synergy: [acidic_group, arylacetic_core]
+    pathway: "COX-1 inhibition → ↓ prostaglandin → GI mucosa irritation"
+    reference: "PMID 10542302"
+  Aspirin:
+    key_features: [salicylate_head, ester_link, acetyl_group]
+    synergy: [salicylate_head, acetyl_group]
+    pathway: "Irreversible COX acetylation"
+    reference: "PMID 16581073"
+  Naproxen:
+    key_features: [naphthalene_core, acidic_group]
+    synergy: [acidic_group, naphthalene_core]
+    pathway: "Reversible COX inhibition"
+    reference: "PMID 29591012"
+  Indomethacin:
+    key_features: [indole_ring, halogen, acidic_group]
+    synergy: [indole_ring, acidic_group]
+    pathway: "Potent COX inhibition → high GI risk"
+    reference: "PMID 30977556"
+
+Infections:
+  Prednisolone:
+    key_features: [glucocorticoid_core, 11beta_OH, 17alpha_OH]
+    synergy: [glucocorticoid_core, 11beta_OH]
+    pathway: "Immunosuppression → ↑ infection susceptibility"
+    reference: "PMID 31162841"
+  Tacrolimus:
+    key_features: [macrolide_lactone, pipecolate, allyl_chain]
+    synergy: [macrolide_lactone, pipecolate]
+    pathway: "Calcineurin inhibition → ↓ T-cell activation"
+    reference: "PMID 17193825"
+  Cyclophosphamide:
+    key_features: [phosphoramide, heteroatom_cluster]
+    synergy: [phosphoramide, heteroatom_cluster]
+    pathway: "DNA cross-linking → bone-marrow suppression"
+    reference: "PMID 12576317"
+  Rituximab:
+    key_features: [anti_CD20_mAb]
+    synergy: [anti_CD20_mAb]
+    pathway: "B-cell depletion"
+    reference: "PMID 12010831"
+
+NervousSystem:
+  Fluoxetine:
+    key_features: [aromatic_amine, trifluoromethyl, ether_link]
+    synergy: [aromatic_amine, trifluoromethyl]
+    pathway: "Selective serotonin reuptake inhibition"
+    reference: "PMID 33164745"
+  Clozapine:
+    key_features: [diazepine_ring, dichloro_sub, N-piperazine]
+    synergy: [diazepine_ring, N-piperazine]
+    pathway: "Multi-receptor antagonism (5-HT2A, D4)"
+    reference: "PMID 30666055"
+  Carbamazepine:
+    key_features: [dibenzazepine, amide, epoxide_metabolite]
+    synergy: [dibenzazepine, epoxide_metabolite]
+    pathway: "Voltage-gated Na+ channel blockade"
+    reference: "PMID 14745669"
+  Levetiracetam:
+    key_features: [pyrrolidone_core, acetamide]
+    synergy: [pyrrolidone_core, acetamide]
+    pathway: "SV2A modulation"
+    reference: "PMID 25165897"
