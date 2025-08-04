@@ -1,48 +1,71 @@
-# =============================
-# app.py – UI for full feature set
-# =============================
+"""
+app.py – Streamlit front‑end for the Tox21 predictor
+Last updated: 2025‑07‑28
+"""
+
+import base64
+
 import streamlit as st
-from utils import predict
-from pathlib import Path
 
-st.set_page_config(page_title="Tox21 multi‑endpoint predictor", layout="wide")
-st.title("🧪 Tox21 Multi‑endpoint Predictor")
+import utils
 
-smiles = st.text_input("Enter SMILES", "CCOc1ccc2nc(S(N)(=O)=O)sc2c1")
-if st.button("Predict") and smiles:
-    with st.spinner("Crunching …"):
-        out = predict(smiles)
+st.set_page_config(page_title="Tox21 predictor", layout="wide")
+st.title("🧪 Tox21 multi‑endpoint toxicity classifier (v0.5)")
 
-    # verdict sentence + SHAP‑coloured molecule
-    st.markdown(out["sentence"], unsafe_allow_html=True)
-    st.image(out["mol_svg"], use_column_width=False)
+smiles = st.text_input("Paste a SMILES string here", "")
 
-    # probability table
-    with st.expander("Probability table"):
-        st.dataframe(out["table"], hide_index=True)
+if st.button("Predict", disabled=not smiles):
+    try:
+        out = utils.predict(smiles)
+    except ValueError as e:
+        st.error(str(e))
+        st.stop()
 
-    # phys‑chem descriptors + radar
-    with st.expander("Phys‑chem descriptors"):
-        col1, col2 = st.columns([1, 1])
-        col1.dataframe(out["physchem_df"], hide_index=True)
-        col2.image(f"data:image/png;base64,{out['radar_png']}")
+    st.markdown(out["sentence"])
 
-    # toxicophore SMARTS
-    if not out["toxic_df"].empty:
-        with st.expander("Toxicophore SMARTS"):
-            st.dataframe(out["toxic_df"], hide_index=True)
+    # probabilities
+    with st.expander("Prediction probabilities"):
+        st.dataframe(
+            out["pred_df"].style.format({"Probability": "{:.2f}"}),
+            hide_index=True,
+            use_container_width=True,
+        )
 
-    # PubChem assays
+    # SHAP token contributions (NEW)
+    if not out["shap_df"].empty:
+        with st.expander("Explainability – top token contributions"):
+            st.dataframe(
+                out["shap_df"].style.format({"SHAP": "{:.3f}"}),
+                hide_index=True,
+            )
+
+    # phys‑chem
+    with st.expander("Physico‑chemical descriptors"):
+        st.dataframe(out["physchem_df"], hide_index=True)
+
+    # PubChem molecule data
+    if not out["pubchem_df"].empty:
+        with st.expander("PubChem molecular data"):
+            st.dataframe(out["pubchem_df"], hide_index=True)
+
+    # assays
     if not out["assay_df"].empty:
-        with st.expander("PubChem assays"):
+        with st.expander("PubChem assay activity"):
             st.dataframe(out["assay_df"], hide_index=True)
 
-    # ChEMBL targets
-    if not out["chembl_df"].empty:
-        with st.expander("ChEMBL target enrichment"):
-            st.dataframe(out["chembl_df"], hide_index=True)
+    # toxicophores
+    if not out["tox_df"].empty:
+        with st.expander("Toxicophore alerts"):
+            st.dataframe(out["tox_df"], hide_index=True)
 
-    # PDF report download
-    report_path = Path(out["report_path"])
-    with report_path.open("rb") as fh:
-        st.download_button("Download PDF report", fh, file_name=report_path.name, mime="application/pdf")
+    # radar plot
+    st.image(out["radar_png"].getvalue(), caption="Phys‑chem radar plot")
+
+    # PDF download
+    with open(out["report_path"], "rb") as f:
+        b64 = base64.b64encode(f.read()).decode()
+    st.markdown(
+        f'<a href="data:application/pdf;base64,{b64}" '
+        'download="Tox21_report.pdf">📄 Download full PDF report</a>',
+        unsafe_allow_html=True,
+    )
