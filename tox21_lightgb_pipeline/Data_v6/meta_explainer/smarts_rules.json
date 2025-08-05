@@ -1,0 +1,42 @@
+{
+  "Aromatic amine": {
+    "smarts": "[NX3][cR]",
+    "explanation": "mutagenicity and DNA interaction"
+  },
+  "Nitro group": {
+    "smarts": "[NX3](=O)=O",
+    "explanation": "oxidative stress and mutagenicity"
+  },
+  "Sulfonamide": {
+    "smarts": "S(=O)(=O)[NX3]",
+    "explanation": "allergic responses and metabolic activation"
+  },
+  "Phenol": {
+    "smarts": "c[OH]",
+    "explanation": "redox cycling and toxicity via reactive oxygen species"
+  },
+  "Halogenated benzene": {
+    "smarts": "c[Cl,Br,F,I]",
+    "explanation": "endocrine disruption and liver toxicity"
+  },
+  "Carboxylic acid": {
+    "smarts": "C(=O)[OH]",
+    "explanation": "irritancy and phase I metabolism"
+  },
+  "Aldehyde": {
+    "smarts": "[CX3H1](=O)[#6]",
+    "explanation": "cross-linking with DNA/proteins, tissue damage"
+  },
+  "Ketone": {
+    "smarts": "[#6][CX3](=O)[#6]",
+    "explanation": "involved in redox cycling and electrophilic reactivity"
+  },
+  "Primary amine": {
+    "smarts": "[NX3;H2][#6]",
+    "explanation": "forms DNA adducts, mutagenic potential"
+  },
+  "Thiol": {
+    "smarts": "[#16H]",
+    "explanation": "strong nucleophile, binds metals and proteins"
+  }
+}

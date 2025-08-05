@@ -1,71 +1,41 @@
-"""
-app.py – Streamlit front‑end for the Tox21 predictor
-Last updated: 2025‑07‑28
-"""
-
-import base64
-
 import streamlit as st
+from utils import (
+    predict_and_explain_all_labels,
+    summarize_prediction,
+    generate_toxicity_radar,
+    highlight_toxicophores
+)
 
-import utils
+st.set_page_config(page_title="Tox21 Drug Toxicity Predictor", layout="centered")
+st.title("💊 Tox21 Drug Toxicity Predictor")
+st.markdown("Enter a **SMILES string** to predict toxicological endpoints.")
 
-st.set_page_config(page_title="Tox21 predictor", layout="wide")
-st.title("🧪 Tox21 multi‑endpoint toxicity classifier (v0.5)")
+# --- SMILES Input ---
+user_input = st.text_input("SMILES:")  # Default: Aspirin
 
-smiles = st.text_input("Paste a SMILES string here", "")
-
-if st.button("Predict", disabled=not smiles):
+if user_input:
+    smiles = user_input.strip()
     try:
-        out = utils.predict(smiles)
-    except ValueError as e:
-        st.error(str(e))
-        st.stop()
+        # === Prediction + SHAP Explanation ===
+        result = predict_and_explain_all_labels(smiles)
+        st.markdown(summarize_prediction(result), unsafe_allow_html=True)
 
-    st.markdown(out["sentence"])
+        # === Radar Plot ===
+        radar_fig = generate_toxicity_radar(smiles, result)
+        st.markdown("### 🧭 Toxicity Fingerprint")
+        st.plotly_chart(radar_fig, use_container_width=True)
 
-    # probabilities
-    with st.expander("Prediction probabilities"):
-        st.dataframe(
-            out["pred_df"].style.format({"Probability": "{:.2f}"}),
-            hide_index=True,
-            use_container_width=True,
-        )
+        # === SMARTS Toxicophore Detection ===
+        st.markdown("### 🧬 Detected Toxicophores")
+        matched, img = highlight_toxicophores(smiles)
 
-    # SHAP token contributions (NEW)
-    if not out["shap_df"].empty:
-        with st.expander("Explainability – top token contributions"):
-            st.dataframe(
-                out["shap_df"].style.format({"SHAP": "{:.3f}"}),
-                hide_index=True,
-            )
+        if matched:
+            st.markdown("**☣️ Matched SMARTS Toxicophores:**")
+            for rule in matched:
+                st.markdown(f"- {rule}")
+            st.image(img, caption="Highlighted Toxicophore Regions", use_column_width=True)
+        else:
+            st.info("✅ No toxicophoric substructures detected.")
 
-    # phys‑chem
-    with st.expander("Physico‑chemical descriptors"):
-        st.dataframe(out["physchem_df"], hide_index=True)
-
-    # PubChem molecule data
-    if not out["pubchem_df"].empty:
-        with st.expander("PubChem molecular data"):
-            st.dataframe(out["pubchem_df"], hide_index=True)
-
-    # assays
-    if not out["assay_df"].empty:
-        with st.expander("PubChem assay activity"):
-            st.dataframe(out["assay_df"], hide_index=True)
-
-    # toxicophores
-    if not out["tox_df"].empty:
-        with st.expander("Toxicophore alerts"):
-            st.dataframe(out["tox_df"], hide_index=True)
-
-    # radar plot
-    st.image(out["radar_png"].getvalue(), caption="Phys‑chem radar plot")
-
-    # PDF download
-    with open(out["report_path"], "rb") as f:
-        b64 = base64.b64encode(f.read()).decode()
-    st.markdown(
-        f'<a href="data:application/pdf;base64,{b64}" '
-        'download="Tox21_report.pdf">📄 Download full PDF report</a>',
-        unsafe_allow_html=True,
-    )
+    except Exception as e:
+        st.error(f"❌ Prediction failed: {e}")
