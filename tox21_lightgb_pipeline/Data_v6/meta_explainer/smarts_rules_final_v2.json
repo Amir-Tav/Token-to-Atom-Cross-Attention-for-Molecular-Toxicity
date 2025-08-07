@@ -1,0 +1,443 @@
+{
+  "NR-AR": [
+    {
+      "name": "Aromatic amine",
+      "smarts": "[NX3][cR]",
+      "explanation": "In organic chemistry, an aromatic amine is an organic compound consisting of an aromatic ring attached to an amine.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aromatic_amine"
+    },
+    {
+      "name": "Steroid core",
+      "smarts": "C1CCC2C(C1)CCC3C2CCC4=CC=CC=C34",
+      "explanation": "binds androgen receptor",
+      "severity": "medium"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Phenol",
+      "smarts": "c[OH]",
+      "explanation": "Phenol is an aromatic organic compound with the molecular formula C6H5OH.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Phenol"
+    },
+    {
+      "name": "Thiol",
+      "smarts": "[#16H]",
+      "explanation": "In organic chemistry, a thiol, or thiol derivative, is any organosulfur compound of the form R\u2212SH, where R represents an alkyl or other organic substituent.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Thiol"
+    },
+    {
+      "name": "Hydrazine",
+      "smarts": "NN",
+      "explanation": "Hydrazine is an inorganic compound with the chemical formula N2H4.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Hydrazine"
+    },
+    {
+      "name": "Halogenated alkane",
+      "smarts": "C(Cl)(Cl)Cl",
+      "explanation": "lipophilicity and receptor interference",
+      "severity": "medium"
+    },
+    {
+      "name": "Alkene",
+      "smarts": "C=C",
+      "explanation": "In organic chemistry, an alkene, or olefin, is a hydrocarbon containing a carbon\u2013carbon double bond.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkene"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    },
+    {
+      "name": "Ketone",
+      "smarts": "[#6][CX3](=O)[#6]",
+      "explanation": "In organic chemistry, a ketone is an organic compound with the structure R\u2212C(=O)\u2212R', where R and R' can be a variety of carbon-containing substituents.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Ketone"
+    }
+  ],
+  "SR-MMP": [
+    {
+      "name": "Metal chelator",
+      "smarts": "C(=O)[O-]",
+      "explanation": "Chelation is a type of bonding and sequestration of metal atoms.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Metal_chelator"
+    },
+    {
+      "name": "Hydroxamic acid",
+      "smarts": "C(=O)NHO",
+      "explanation": "In organic chemistry, hydroxamic acids are a class of organic compounds having a general formula R\u2212C(=O)\u2212N(\u2212OH)\u2212R' bearing the functional group \u2212C(=O)\u2212N(\u2212OH)\u2212, where R and R' are typically organyl groups or hydrogen.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Hydroxamic_acid"
+    },
+    {
+      "name": "Diketo acid",
+      "smarts": "OC(=O)C(=O)",
+      "explanation": "binds MMP catalytic domain",
+      "severity": "medium"
+    },
+    {
+      "name": "Pyridine ring",
+      "smarts": "c1ccncc1",
+      "explanation": "Pyridine is a basic heterocyclic organic compound with the chemical formula C5H5N.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Pyridine_ring"
+    },
+    {
+      "name": "Imidazole",
+      "smarts": "c1cnc[nH]1",
+      "explanation": "Imidazole (ImH) is an organic compound with the formula (CH)3(NH)N.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Imidazole"
+    },
+    {
+      "name": "Sulfonamide",
+      "smarts": "S(=O)(=O)[NX3]",
+      "explanation": "In organic chemistry, the sulfonamide functional group is an organosulfur group with the structure R\u2212S(=O)2\u2212NR2.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Sulfonamide"
+    },
+    {
+      "name": "Hydroxyl group",
+      "smarts": "[OH]",
+      "explanation": "In chemistry, a hydroxy or hydroxyl group is a functional group with the chemical formula \u2212OH and composed of one oxygen atom covalently bonded to one hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Hydroxyl_group"
+    },
+    {
+      "name": "Triazole",
+      "smarts": "c1cnnn1",
+      "explanation": "A triazole is a heterocyclic compound featuring a five-membered ring of two carbon atoms and three nitrogen atoms with molecular formula C2H3N3.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Triazole"
+    },
+    {
+      "name": "Thiazole",
+      "smarts": "c1nccs1",
+      "explanation": "Thiazole, or 1,3-thiazole, is a 5-membered heterocyclic compound that contains both sulfur and nitrogen.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Thiazole"
+    },
+    {
+      "name": "Carboxylic acid",
+      "smarts": "C(=O)[OH]",
+      "explanation": "In organic chemistry, a carboxylic acid is an organic acid that contains a carboxyl group attached to an R-group.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Carboxylic_acid"
+    }
+  ],
+  "NR-AR-LBD": [
+    {
+      "name": "Nitro group",
+      "smarts": "[NX3](=O)=O",
+      "explanation": "In organic chemistry, nitro compounds are organic compounds that contain one or more nitro functional groups.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Nitro_group"
+    },
+    {
+      "name": "Epoxide",
+      "smarts": "[C;r3]1[O;r3][C;r3]1",
+      "explanation": "In organic chemistry, an epoxide is a cyclic ether, where the ether forms a three-atom ring: two atoms of carbon and one atom of oxygen.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Epoxide"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    }
+  ],
+  "NR-AhR": [
+    {
+      "name": "Nitro group",
+      "smarts": "[NX3](=O)=O",
+      "explanation": "In organic chemistry, nitro compounds are organic compounds that contain one or more nitro functional groups.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Nitro_group"
+    },
+    {
+      "name": "Epoxide",
+      "smarts": "[C;r3]1[O;r3][C;r3]1",
+      "explanation": "In organic chemistry, an epoxide is a cyclic ether, where the ether forms a three-atom ring: two atoms of carbon and one atom of oxygen.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Epoxide"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    }
+  ],
+  "NR-Aromatase": [
+    {
+      "name": "Nitro group",
+      "smarts": "[NX3](=O)=O",
+      "explanation": "In organic chemistry, nitro compounds are organic compounds that contain one or more nitro functional groups.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Nitro_group"
+    },
+    {
+      "name": "Epoxide",
+      "smarts": "[C;r3]1[O;r3][C;r3]1",
+      "explanation": "In organic chemistry, an epoxide is a cyclic ether, where the ether forms a three-atom ring: two atoms of carbon and one atom of oxygen.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Epoxide"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    }
+  ],
+  "NR-ER": [
+    {
+      "name": "Nitro group",
+      "smarts": "[NX3](=O)=O",
+      "explanation": "In organic chemistry, nitro compounds are organic compounds that contain one or more nitro functional groups.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Nitro_group"
+    },
+    {
+      "name": "Epoxide",
+      "smarts": "[C;r3]1[O;r3][C;r3]1",
+      "explanation": "In organic chemistry, an epoxide is a cyclic ether, where the ether forms a three-atom ring: two atoms of carbon and one atom of oxygen.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Epoxide"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    }
+  ],
+  "NR-ER-LBD": [
+    {
+      "name": "Nitro group",
+      "smarts": "[NX3](=O)=O",
+      "explanation": "In organic chemistry, nitro compounds are organic compounds that contain one or more nitro functional groups.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Nitro_group"
+    },
+    {
+      "name": "Epoxide",
+      "smarts": "[C;r3]1[O;r3][C;r3]1",
+      "explanation": "In organic chemistry, an epoxide is a cyclic ether, where the ether forms a three-atom ring: two atoms of carbon and one atom of oxygen.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Epoxide"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    }
+  ],
+  "NR-PPAR-gamma": [
+    {
+      "name": "Nitro group",
+      "smarts": "[NX3](=O)=O",
+      "explanation": "In organic chemistry, nitro compounds are organic compounds that contain one or more nitro functional groups.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Nitro_group"
+    },
+    {
+      "name": "Epoxide",
+      "smarts": "[C;r3]1[O;r3][C;r3]1",
+      "explanation": "In organic chemistry, an epoxide is a cyclic ether, where the ether forms a three-atom ring: two atoms of carbon and one atom of oxygen.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Epoxide"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    }
+  ],
+  "SR-ARE": [
+    {
+      "name": "Nitro group",
+      "smarts": "[NX3](=O)=O",
+      "explanation": "In organic chemistry, nitro compounds are organic compounds that contain one or more nitro functional groups.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Nitro_group"
+    },
+    {
+      "name": "Epoxide",
+      "smarts": "[C;r3]1[O;r3][C;r3]1",
+      "explanation": "In organic chemistry, an epoxide is a cyclic ether, where the ether forms a three-atom ring: two atoms of carbon and one atom of oxygen.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Epoxide"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    }
+  ],
+  "SR-ATAD5": [
+    {
+      "name": "Nitro group",
+      "smarts": "[NX3](=O)=O",
+      "explanation": "In organic chemistry, nitro compounds are organic compounds that contain one or more nitro functional groups.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Nitro_group"
+    },
+    {
+      "name": "Epoxide",
+      "smarts": "[C;r3]1[O;r3][C;r3]1",
+      "explanation": "In organic chemistry, an epoxide is a cyclic ether, where the ether forms a three-atom ring: two atoms of carbon and one atom of oxygen.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Epoxide"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    }
+  ],
+  "SR-HSE": [
+    {
+      "name": "Nitro group",
+      "smarts": "[NX3](=O)=O",
+      "explanation": "In organic chemistry, nitro compounds are organic compounds that contain one or more nitro functional groups.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Nitro_group"
+    },
+    {
+      "name": "Epoxide",
+      "smarts": "[C;r3]1[O;r3][C;r3]1",
+      "explanation": "In organic chemistry, an epoxide is a cyclic ether, where the ether forms a three-atom ring: two atoms of carbon and one atom of oxygen.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Epoxide"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    }
+  ],
+  "SR-p53": [
+    {
+      "name": "Nitro group",
+      "smarts": "[NX3](=O)=O",
+      "explanation": "In organic chemistry, nitro compounds are organic compounds that contain one or more nitro functional groups.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Nitro_group"
+    },
+    {
+      "name": "Epoxide",
+      "smarts": "[C;r3]1[O;r3][C;r3]1",
+      "explanation": "In organic chemistry, an epoxide is a cyclic ether, where the ether forms a three-atom ring: two atoms of carbon and one atom of oxygen.",
+      "severity": "high",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Epoxide"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "The haloalkanes are alkanes containing one or more halogen substituents of hydrogen atom.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Alkyl_halide"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "In organic chemistry, an aldehyde is an organic compound containing a functional group with the structure R\u2212CH=O.",
+      "severity": "medium",
+      "ref": "https://en.wikipedia.org/api/rest_v1/page/summary/Aldehyde"
+    }
+  ]
+}

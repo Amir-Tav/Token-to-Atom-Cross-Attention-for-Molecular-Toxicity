@@ -1,0 +1,106 @@
+{
+  "NR-AR": [
+    {
+      "name": "Aromatic amine",
+      "smarts": "[NX3][cR]",
+      "explanation": "mutagenicity and DNA interaction"
+    },
+    {
+      "name": "Steroid core",
+      "smarts": "C1CCC2C(C1)CCC3C2CCC4=CC=CC=C34",
+      "explanation": "binds androgen receptor"
+    },
+    {
+      "name": "Alkyl halide",
+      "smarts": "[CX4][F,Cl,Br,I]",
+      "explanation": "alkylating reactivity"
+    },
+    {
+      "name": "Phenol",
+      "smarts": "c[OH]",
+      "explanation": "receptor binding and redox activity"
+    },
+    {
+      "name": "Thiol",
+      "smarts": "[#16H]",
+      "explanation": "metal binding and reactivity"
+    },
+    {
+      "name": "Hydrazine",
+      "smarts": "NN",
+      "explanation": "DNA damage potential"
+    },
+    {
+      "name": "Halogenated alkane",
+      "smarts": "C(Cl)(Cl)Cl",
+      "explanation": "lipophilicity and receptor interference"
+    },
+    {
+      "name": "Alkene",
+      "smarts": "C=C",
+      "explanation": "double bond increases reactivity"
+    },
+    {
+      "name": "Aldehyde",
+      "smarts": "[CX3H1](=O)[#6]",
+      "explanation": "protein crosslinking potential"
+    },
+    {
+      "name": "Ketone",
+      "smarts": "[#6][CX3](=O)[#6]",
+      "explanation": "redox cycling involvement"
+    }
+  ],
+  "SR-MMP": [
+    {
+      "name": "Metal chelator",
+      "smarts": "C(=O)[O-]",
+      "explanation": "zinc binding potential"
+    },
+    {
+      "name": "Hydroxamic acid",
+      "smarts": "C(=O)NHO",
+      "explanation": "strong zinc chelator"
+    },
+    {
+      "name": "Diketo acid",
+      "smarts": "OC(=O)C(=O)",
+      "explanation": "binds MMP catalytic domain"
+    },
+    {
+      "name": "Pyridine ring",
+      "smarts": "c1ccncc1",
+      "explanation": "chelates with MMPs"
+    },
+    {
+      "name": "Imidazole",
+      "smarts": "c1cnc[nH]1",
+      "explanation": "chelates metal ions in MMP"
+    },
+    {
+      "name": "Sulfonamide",
+      "smarts": "S(=O)(=O)[NX3]",
+      "explanation": "MMP inhibitor core"
+    },
+    {
+      "name": "Hydroxyl group",
+      "smarts": "[OH]",
+      "explanation": "hydrogen bonding and reactivity"
+    },
+    {
+      "name": "Triazole",
+      "smarts": "c1cnnn1",
+      "explanation": "metal binding group"
+    },
+    {
+      "name": "Thiazole",
+      "smarts": "c1nccs1",
+      "explanation": "electrophilic and reactive"
+    },
+    {
+      "name": "Carboxylic acid",
+      "smarts": "C(=O)[OH]",
+      "explanation": "metal coordination potential"
+    }
+  ]
+}

@@ -1,8 +1,5 @@
 # --- Standard Library ---
-import os
-import io
-import json
-import joblib
+import os, io, json, joblib
 
 # --- Scientific Computing ---
 import numpy as np
@@ -14,11 +11,10 @@ from PIL import Image
 
 # --- RDKit (Cheminformatics) ---
 from rdkit import Chem
-from rdkit.Chem import AllChem
-from rdkit.Chem import Draw
+from rdkit.Chem import AllChem, Draw
 from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit import RDLogger
-RDLogger.DisableLog('rdApp.*')  # Silence RDKit warnings
+RDLogger.DisableLog("rdApp.*")        # silence RDKit warnings
 
 # --- Mordred (Descriptors) ---
 from mordred import Calculator, descriptors
@@ -27,146 +23,80 @@ from mordred import Calculator, descriptors
 import shap
 
 # --- External Lookup (Optional) ---
-import pubchempy as pcp  # Only needed if you plan to fetch extra info from PubChem
+import pubchempy as pcp              # optional
 
-
-MODEL_PATH = "tox21_lightgb_pipeline/models/v7"  # ⬅️ New model path
-SAVE_DIR = "tox21_lightgb_pipeline/Data_v6/processed"
+# --- Paths & Globals -------------------------------------------------
+MODEL_PATH = "tox21_lightgb_pipeline/models/v7"
+SAVE_DIR   = "tox21_lightgb_pipeline/Data_v6/processed"
 
 label_cols = [
     "NR-AR", "NR-AR-LBD", "NR-AhR", "NR-Aromatase", "NR-ER",
     "NR-ER-LBD", "NR-PPAR-gamma", "SR-ARE", "SR-ATAD5",
-    "SR-HSE", "SR-MMP", "SR-p53"
+    "SR-HSE", "SR-MMP", "SR-p53",
 ]
 
-# Define SMARTS patterns for common toxicophores
-TOXICOPHORE_SMARTS = {
-    "Aromatic amine": "[NX3][cR]",                     # e.g., Aniline
-    "Nitro group": "[NX3](=O)=O",                      # e.g., Nitrobenzene
-    "Halogen": "[F,Cl,Br,I]",                          # Halogen atoms
-    "Thiophene ring": "c1ccsc1",                       # 5-membered sulfur heterocycles
-    "Alkyl halide": "[CX4][F,Cl,Br,I]",                # R-Cl, R-Br, etc.
-    "Epoxide": "[C;r3]1[O;r3][C;r3]1",                 # 3-membered ring with O
-    "Michael acceptor": "C=CC=O",                      # α,β-unsaturated carbonyl
-    "Imine": "C=N",                                    # C=N double bond
-    "Quinone": "O=C1C=CC(=O)C=C1",                     # e.g., Benzoquinone
-    "Hydrazine": "NN",                                 # R-NH-NH-R
-}
-
-# Load feature names and model-specific masks
+# --------------------------------------------------------------------
+#  Load feature names, meta-explanations, and per-endpoint SMARTS rules
+# --------------------------------------------------------------------
 with open(os.path.join(SAVE_DIR, "feature_names.txt")) as f:
     feature_names = f.read().splitlines()
 
-# Load meta explanations for generate_textual_explanation()
-with open("tox21_lightgb_pipeline/Data_v6/meta_explainer/meta_explanations.json") as f:
+with open("tox21_lightgb_pipeline/Data_v6/meta_explainer/meta_explanations_plain.json") as f:
     META_EXPLAIN_DICT = json.load(f)
 
-# Load SMARTS toxicophore mapping rules
-with open("tox21_lightgb_pipeline/Data_v6/meta_explainer/smarts_rules.json") as f:
+with open("tox21_lightgb_pipeline/Data_v6/meta_explainer/smarts_rules_final.json") as f:
     SMARTS_RULES = json.load(f)
 
+thresholds     = joblib.load(os.path.join(MODEL_PATH, "thresholds.pkl"))
+feature_masks  = joblib.load(os.path.join(MODEL_PATH, "feature_masks.pkl"))
+calc           = Calculator(descriptors, ignore_3D=True)
 
 
+# ── endpoint-specific mechanistic tails (edit as you like) ─────────────
+ENDPOINT_TAIL = {
+    # Stress-response (SR) endpoints ────────────────────────────────
+    "SR-MMP":   "enhanced zinc-binding capacity and reactivity at metalloprotein active sites — both linked to MMP interference",
+    "SR-ARE":   "electrophilic / oxidative stress that triggers the ARE antioxidant pathway",
+    "SR-ATAD5": "replication-fork stress and activation of the ATAD5 DNA-repair mechanism",
+    "SR-HSE":   "protein-misfolding stress that induces the heat-shock response",
+    "SR-p53":   "DNA-damage signalling that stabilises p53 and promotes cell-cycle arrest or apoptosis",
 
-thresholds = joblib.load(os.path.join(MODEL_PATH, "thresholds.pkl"))
-feature_masks = joblib.load(os.path.join(MODEL_PATH, "feature_masks.pkl"))
-
-# Mordred calculator
-calc = Calculator(descriptors, ignore_3D=True)
-
-
-##############################################################----SHAPES----#####
-
-###--------------------------------generate_toxicity_radar()
-def generate_toxicity_radar(smiles, results):
-    """
-    Generate a radar chart showing toxicity probabilities across all 12 labels.
-    """
-    labels = results["predicted_labels"]
-    explanations = results["explanations"]
-
-    probs = []
-    active = []
-
-    for label in label_cols:
-        if label in explanations:
-            prob = explanations[label]["prob"]
-        else:
-            prob = 0.0
-        probs.append(prob)
-        active.append(label in labels)
-
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatterpolar(
-        r=probs + [probs[0]],  # Close the loop
-        theta=label_cols + [label_cols[0]],
-        fill='toself',
-        name='Predicted Toxicity',
-        line=dict(color='crimson'),
-        marker=dict(symbol='circle'),
-        hovertemplate='%{theta}<br>Prob: %{r:.2f}<extra></extra>',
-    ))
-
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(visible=True, range=[0, 1], tickfont_size=10),
-        ),
-        showlegend=False,
-        title=f"Toxicity Radar for: {smiles}",
-        margin=dict(l=30, r=30, t=50, b=30),
-        height=500
-    )
-
-    return fig
-
-###-------------------------------highlight_toxicophores()
-def highlight_toxicophores(smiles):
-    mol = Chem.MolFromSmiles(smiles)
-    if mol is None:
-        return None
-
-    highlighted_mols = []
-    legend_list = []
-
-    for tox_label, smarts_list in TOXICOPHORE_SMARTS.items():
-        match_found = False
-        for smarts in smarts_list:
-            pattern = Chem.MolFromSmarts(smarts)
-            if pattern and mol.HasSubstructMatch(pattern):
-                match_found = True
-                break
-
-        if match_found:
-            match_mol = Chem.Mol(mol)
-            AllChem.Compute2DCoords(match_mol)
-
-            # Highlight all matching atoms from all SMARTS under this label
-            highlight_atoms = set()
-            for smarts in smarts_list:
-                pattern = Chem.MolFromSmarts(smarts)
-                if pattern:
-                    matches = match_mol.GetSubstructMatches(pattern)
-                    for match in matches:
-                        highlight_atoms.update(match)
-
-            for idx in highlight_atoms:
-                match_mol.GetAtomWithIdx(idx).SetProp('atomNote', '*')
-
-            highlighted_mols.append(match_mol)
-            legend_list.append(f"{tox_label} toxicophore")
-
-    if not highlighted_mols:
-        return None
-
-    img = Draw.MolsToGridImage(
-        [mol] + highlighted_mols,
-        legends=["Original"] + legend_list,
-        useSVG=False
-    )
-    return img
+    # Nuclear-receptor (NR) endpoints ──────────────────────────────
+    "NR-AR":          "androgen-receptor activation and downstream androgenic gene expression",
+    "NR-AR-LBD":      "high-affinity occupation of the AR ligand-binding domain and altered AR signalling",
+    "NR-AhR":         "planar aromatic binding to AhR and dysregulated xenobiotic response genes",
+    "NR-Aromatase":   "CYP19 aromatase inhibition via heme-iron coordination and reduced estrogen synthesis",
+    "NR-ER":          "estrogen-receptor binding and transcriptional activation of ER target genes",
+    "NR-ER-LBD":      "ligand-binding-domain engagement within ER, altering co-activator recruitment",
+    "NR-PPAR-gamma":  "PPAR-γ activation that modulates adipogenic and metabolic gene regulation",
+}
 
 
+## for the one line paraph 
+def build_one_liner(label: str, shap_df: pd.DataFrame, smiles: str) -> str:
+    """Return a sentence: descriptor + toxicophore + tail."""
+    # 1) top descriptor
+    desc_df = shap_df[~shap_df["feature"].str.startswith("TOXICOPHORE_")].copy()
+    desc_df = desc_df.reindex(desc_df["shap_value"].abs().sort_values(ascending=False).index)
+    if desc_df.empty:
+        return f"Predicted {label} toxicity lacks a dominant molecular driver."
+
+    top_desc = desc_df.iloc[0]
+    d_name   = top_desc["feature"]
+    d_dir    = "high " if top_desc["shap_value"] > 0 else "low "
+    desc_part = f"{d_dir}{d_name}"
+
+    # 2) first matching toxicophore, if any
+    tox_matches = match_toxicophores_with_explanations(smiles, label)
+    if tox_matches:
+        tox_part = f"and the presence of a {tox_matches[0]['name']}"
+    else:
+        tox_part = ""
+
+    # 3) tail
+    tail = ENDPOINT_TAIL.get(label, "mechanistic activity")
+
+    return f"Predicted {label} toxicity may be due to {desc_part} {tox_part}, suggesting {tail}."
 
 
 def compute_descriptors(smiles):
@@ -179,7 +109,78 @@ def compute_descriptors(smiles):
     except:
         return None
 
+
+def match_toxicophores_with_explanations(smiles, label=None):
+    """
+    Match SMARTS toxicophores based on the user's SMILES and toxicity label.
+    If label is None, all rules are checked.
+    """
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return []
+
+    matches = []
+
+    # Get all SMARTS for the given label, or all labels if label=None
+    label_smarts = SMARTS_RULES.get(label, []) if label else [
+        rule for all_rules in SMARTS_RULES.values() for rule in all_rules
+    ]
+
+    for rule in label_smarts:
+        patt = Chem.MolFromSmarts(rule["smarts"])
+        if patt and mol.HasSubstructMatch(patt):
+            matches.append({
+                "name": rule["name"],
+                "explanation": rule["explanation"]
+            })
+
+    return matches
+
+
+def highlight_toxicophores(smiles):
+    """
+    Draw molecule with highlighted toxicophores across all labels.
+    Returns matched toxicophores (with explanations) and the image.
+    """
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        raise ValueError("Invalid SMILES structure.")
+
+    AllChem.Compute2DCoords(mol)
+    highlight_atoms = set()
+    matched_toxophores = []
+
+    # Flatten all SMARTS rules
+    all_rules = [rule for sublist in SMARTS_RULES.values() for rule in sublist]
+
+    for rule in all_rules:
+        patt = Chem.MolFromSmarts(rule["smarts"])
+        if not patt:
+            continue
+        matches = mol.GetSubstructMatches(patt)
+        if matches:
+            matched_toxophores.append(f"☣️ **{rule['name']}**: {rule['explanation']}")
+            for match in matches:
+                highlight_atoms.update(match)
+
+    # Draw molecule with highlighted atoms
+    drawer = rdMolDraw2D.MolDraw2DCairo(500, 300)
+    drawer.DrawMolecule(
+        mol,
+        highlightAtoms=list(highlight_atoms),
+        legend="Matched Toxicophores" if matched_toxophores else "No toxicophores found"
+    )
+    drawer.FinishDrawing()
+    img_data = drawer.GetDrawingText()
+    img = Image.open(io.BytesIO(img_data))
+
+    return matched_toxophores, img
+
+
 def predict_and_explain_all_labels(smiles):
+    """
+    Predict all 12 toxicity labels using trained models and enrich explanation using SHAP + SMARTS rules.
+    """
     desc_values = compute_descriptors(smiles)
     if desc_values is None:
         raise ValueError("Invalid SMILES")
@@ -208,149 +209,111 @@ def predict_and_explain_all_labels(smiles):
                 "feature": features,
                 "shap_value": shap_values.values[0],
                 "feature_value": X_input[0]
-            }).sort_values(by="shap_value", key=np.abs, ascending=False)
+            })
+
+            # Inject SMARTS pseudo-features specific to this label
+            smarts_matches = match_toxicophores_with_explanations(smiles, label)
+            for match in smarts_matches:
+                to_add = pd.DataFrame([{
+                    "feature": f"TOXICOPHORE_{match['name']}",
+                    "shap_value": 0.01,
+                    "feature_value": 1.0
+                }])
+                shap_df = pd.concat([shap_df, to_add], ignore_index=True)
 
             results[label] = {
-            "prob": prob,
-            "threshold": threshold,
-            "pred_score": prob,  # ← Added for sorting in summarize_prediction()
-            "shap_df": shap_df,
-            "top_features": shap_df[["feature", "shap_value"]].head(4).values.tolist()
-        }
+                "prob": prob,
+                "threshold": threshold,
+                "pred_score": prob,
+                "shap_df": shap_df,
+                "top_features": shap_df[["feature", "shap_value"]].head(4).values.tolist()
+            }
+
     return {
         "smiles": smiles,
         "predicted_labels": predicted_labels,
         "explanations": results
     }
-###-------------------------------SMART Meta explainer
-def match_toxicophores_with_explanations(smiles):
-    mol = Chem.MolFromSmiles(smiles)
-    if mol is None:
-        return []
-
-    matches = []
-    for name, rule in SMARTS_RULES.items():
-        patt = Chem.MolFromSmarts(rule["smarts"])
-        if patt and mol.HasSubstructMatch(patt):
-            matches.append({
-                "name": name,
-                "explanation": rule["explanation"]
-            })
-    return matches
 
 
-def highlight_toxicophores(smiles):
+## textual justification and explanations 
+def generate_mechanistic_report(
+    label,
+    shap_df,
+    prob,
+    threshold,
+    smiles,
+    top_k: int = 4,
+    shap_cutoff: float = 0.01,
+):
     """
-    Returns a list of matched toxicophores and an RDKit image with highlights.
+    Returns markdown: one-liner summary + descriptor table.
     """
-    mol = Chem.MolFromSmiles(smiles)
-    if mol is None:
-        raise ValueError("Invalid SMILES structure.")
+    lines = [
+        f"### 🔍 {label} — Mechanistic Report\n",
+        f"✅ **Prediction confidence**: `{prob:.2f}` (threshold = `{threshold:.2f}`)",
+    ]
 
-    # Generate 2D coordinates for better visualization
-    AllChem.Compute2DCoords(mol)
+    # ── NEW one-liner summary ───────────────────────────────────────────
+    lines.append("\n" + build_one_liner(label, shap_df, smiles) + "\n")
 
-    highlight_atoms = set()
-    matched_toxophores = []
+    # ── Descriptor Features (unchanged) ────────────────────────────────
+    lines.append("\n📊 **Contributing Molecular Descriptors:**")
+    desc_df = shap_df[~shap_df["feature"].str.startswith("TOXICOPHORE_")].copy()
+    desc_df = desc_df.reindex(desc_df["shap_value"].abs().sort_values(ascending=False).index)
+    desc_df = desc_df[desc_df["shap_value"].abs() > shap_cutoff].head(top_k)
 
-    for name, rule in TOXICOPHORE_SMARTS.items():
-        smarts = rule["smarts"]
-        explanation = rule["explanation"]
-
-        pattern = Chem.MolFromSmarts(smarts)
-        if not pattern:
-            continue
-
-        matches = mol.GetSubstructMatches(pattern)
-        if matches:
-            matched_toxophores.append(f"☣️ **{name}**: {explanation}")
-            for match in matches:
-                highlight_atoms.update(match)
-
-    # Draw molecule with highlights
-    drawer = rdMolDraw2D.MolDraw2DCairo(500, 300)
-    drawer.DrawMolecule(
-        mol,
-        highlightAtoms=list(highlight_atoms),
-        legend="Matched Toxicophores" if matched_toxophores else "No toxicophores found"
-    )
-    drawer.FinishDrawing()
-
-    img_data = drawer.GetDrawingText()
-    img = Image.open(io.BytesIO(img_data))
-
-    return matched_toxophores, img
-
-# ###--------------------------------generate_textual_explanation()
-def generate_textual_explanation(label, shap_df, max_features=4):
-    """
-    Generate explanation text for a predicted toxicity label.
-    Combines:
-    - SMARTS toxicophore matches (if available in SHAP df)
-    - SHAP feature importance and domain-aware meta explanations
-    """
-    lines = []
-
-    # === 1. SMARTS-based toxicophore explanation (if exists) ===
-    smarts_row = shap_df[shap_df["feature"].str.startswith("TOXICOPHORE_")]
-    if not smarts_row.empty:
-        lines.append("Matched Toxicophores:")
-        for _, row in smarts_row.iterrows():
-            smarts_key = row["feature"].replace("TOXICOPHORE_", "")
-            rule = SMARTS_RULES.get(smarts_key, "unclassified toxicophore")
-            lines.append(f"☣️ {smarts_key}: {rule}")
-        lines.append("")  # Add spacing
-
-    # === 2. SHAP-ranked features and role-based explanations ===
-    # Filter non-toxicophores, sort, and get top features
-    top_feats = shap_df[~shap_df["feature"].str.startswith("TOXICOPHORE_")].head(max_features)
-    
-    for _, row in top_feats.iterrows():
-        fname = row["feature"]
-        shap_val = row["shap_value"]
-        direction = "↑ increase" if shap_val > 0 else "↓ decrease"
-        explanation = META_EXPLAIN_DICT.get(
-            fname, "miscellaneous descriptor — no mapped biological role found"
-        )
-        lines.append(
-            f"- **{fname}** ({explanation}): contributes to toxicity via {direction} effect (SHAP = {shap_val:.3f})"
-        )
-
-    # Final output formatting
-    if lines:
-        return f"💡 **{label} Explanation**:\n\n" + "\n".join(lines)
+    if desc_df.empty:
+        lines.append("- No dominant molecular descriptors detected.")
     else:
-        return f"ℹ️ For **{label}**, no dominant features or toxicophores were found."
+        for _, row in desc_df.iterrows():
+            fname     = row["feature"]
+            shap_val  = row["shap_value"]
+            direction = "↑ increase" if shap_val > 0 else "↓ decrease"
+            expl      = META_EXPLAIN_DICT.get(fname, "no biological annotation")
+            lines.append(f"- **{fname}**: {expl} ({direction}, SHAP={shap_val:.3f})")
 
+    lines.append("\n---")
+    return "\n".join(lines)
 
-###-------------------------------summarize_prediction()
 def summarize_prediction(result):
-    """
-    Generate a full summary text for the predicted toxicity profile,
-    showing toxic classes sorted by model confidence, along with
-    textual + SMARTS-based SHAP explanations.
-    """
     smiles = result["smiles"]
     predicted = result["predicted_labels"]
     if not predicted:
         return f"🔬 The drug (SMILES: `{smiles}`) is predicted **not to exhibit significant toxicity endpoints.**"
 
-    # Sort predicted labels by model prediction score
     sorted_labels = sorted(
         predicted, 
         key=lambda label: result["explanations"][label]["pred_score"], 
         reverse=True
     )
 
-    # Header
-    text = f"🔬 The drug (SMILES: `{smiles}`) is predicted to be toxic in: **{', '.join(sorted_labels)}**.\n\n"
-
-    # For each predicted toxicity class, show SHAP + SMARTS explanation
-    for label in sorted_labels:
-        shap_df = result["explanations"][label]["shap_df"]
-        explanation = generate_textual_explanation(label, shap_df)
-        text += explanation + "\n\n"
-
-    return text.strip()
+    text = f"🔬 The drug (SMILES: `{smiles}`) is predicted to be toxic in: **{', '.join(sorted_labels)}**."
+    return text
 
 
+def generate_toxicity_radar(smiles, results):
+    labels = results["predicted_labels"]
+    explanations = results["explanations"]
+    probs = []
+    for label in label_cols:
+        prob = explanations.get(label, {}).get("prob", 0.0)
+        probs.append(prob)
+    fig = go.Figure()
+    fig.add_trace(go.Scatterpolar(
+        r=probs + [probs[0]],
+        theta=label_cols + [label_cols[0]],
+        fill='toself',
+        name='Predicted Toxicity',
+        line=dict(color='crimson'),
+        marker=dict(symbol='circle'),
+        hovertemplate='%{theta}<br>Prob: %{r:.2f}<extra></extra>',
+    ))
+    fig.update_layout(
+        polar=dict(radialaxis=dict(visible=True, range=[0, 1], tickfont_size=10)),
+        showlegend=False,
+        title=f"Toxicity Radar for: {smiles}",
+        margin=dict(l=30, r=30, t=50, b=30),
+        height=500
+    )
+    return fig
