@@ -1,9 +1,46 @@
+
+# # --- Standard Library ---
+# import os, io, json, joblib, functools
+
+# # --- Scientific Computing ---
+# import numpy as np
+# import pandas as pd
+
+# # --- Visualization ---
+# import plotly.graph_objects as go
+# from PIL import Image
+
+# # --- RDKit (Cheminformatics) ---
+# from rdkit import Chem
+# from rdkit.Chem import AllChem
+# from rdkit.Chem.Draw import rdMolDraw2D
+# from rdkit import RDLogger
+# RDLogger.DisableLog("rdApp.*")  # silence RDKit warnings
+
+# # --- Mordred (Descriptors) ---
+# from mordred import Calculator, descriptors
+
+# # --- SHAP (Explainability) ---
+# import shap  # works with LightGBM tree boosters
+
+# # --- External Lookup (Optional) ---
+# import pubchempy as pcp  # optional; used for name resolution
+
+
 # --- Standard Library ---
 import os, io, json, joblib, functools
+from pathlib import Path
+from typing import Dict, List, Tuple, Optional
 
 # --- Scientific Computing ---
 import numpy as np
 import pandas as pd
+import torch
+import torch.nn as nn  # <— added
+
+# --- Hugging Face / Explainability (Transformer path) ---
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from captum.attr import DeepLift
 
 # --- Visualization ---
 import plotly.graph_objects as go
@@ -19,11 +56,12 @@ RDLogger.DisableLog("rdApp.*")  # silence RDKit warnings
 # --- Mordred (Descriptors) ---
 from mordred import Calculator, descriptors
 
-# --- SHAP (Explainability) ---
+# --- SHAP (Explainability for LightGBM) ---
 import shap  # works with LightGBM tree boosters
 
 # --- External Lookup (Optional) ---
 import pubchempy as pcp  # optional; used for name resolution
+
 
 # ============================
 # Paths & Globals
@@ -338,6 +376,7 @@ def explain_near_misses(smiles: str, top_n: int = 3, top_features: int = 3):
             rows.append((label, prob, thr, neg))
     rows.sort(key=lambda t: t[1], reverse=True)
     return rows[:int(top_n)]
+
 def generate_toxicity_radar(smiles: str, results: dict):
     """Radar over all 12 endpoints showing probabilities (0 for non-predicted)."""
     probs = [results["explanations"].get(lbl, {}).get("prob", 0.0) for lbl in label_cols]
