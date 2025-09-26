@@ -1,0 +1,48 @@
+{
+  "n_labels": 12,
+  "labels": [
+    "NR-AR",
+    "NR-AR-LBD",
+    "NR-AhR",
+    "NR-Aromatase",
+    "NR-ER",
+    "NR-ER-LBD",
+    "NR-PPAR-gamma",
+    "SR-ARE",
+    "SR-ATAD5",
+    "SR-HSE",
+    "SR-MMP",
+    "SR-p53"
+  ],
+  "n_bins": 15,
+  "bootstrap": {
+    "B": 1000,
+    "seed": 4242,
+    "level": "molecule"
+  },
+  "sources": {
+    "macro_agg_json": "D:\\Coding Projects\\Predicting-Drug-Response-Using-Multi-Omics-Data-with-XAI\\v7\\v7_Eval\\RQ2\\test_bootstrap_deltas\\test_macro_ece_brier_aggregates.json",
+    "micro_agg_json": "D:\\Coding Projects\\Predicting-Drug-Response-Using-Multi-Omics-Data-with-XAI\\v7\\v7_Eval\\RQ2\\test_bootstrap_deltas\\test_micro_ece_brier_aggregates.json",
+    "t2_base_csv": "D:\\Coding Projects\\Predicting-Drug-Response-Using-Multi-Omics-Data-with-XAI\\v7\\v7_Eval\\RQ2\\T2\\T2_test_ece_brier.csv"
+  },
+  "generated": {
+    "T2_2_ece_csv": "T2_2_aggregates_ece_uncal_vs_temp.csv",
+    "T2_2_brier_csv": "T2_2_aggregates_brier_uncal_vs_temp.csv",
+    "macro_micro_json": "T2_2_aggregates_macro_micro.json",
+    "T2_3_ece_csv": "T2_3_per_assay_ece_uncal_vs_temp.csv",
+    "T2_5_table_csv": "T2_5_temp_vs_platt.csv",
+    "reliability_dir": "reliability/<ASSAY>.csv (bin,count,conf,acc,method)",
+    "temp_probs_dir": "probs_temp_per_assay/<ASSAY>.csv (prob)",
+    "prevalence_csv": "prevalence.csv",
+    "bootstrap_arrays": [
+      "bootstrap_macro_ece_none.npy",
+      "bootstrap_macro_ece_temp.npy",
+      "bootstrap_macro_brier_none.npy",
+      "bootstrap_macro_brier_temp.npy",
+      "bootstrap_micro_ece_none.npy",
+      "bootstrap_micro_ece_temp.npy",
+      "bootstrap_micro_brier_none.npy",
+      "bootstrap_micro_brier_temp.npy"
+    ]
+  }
+}

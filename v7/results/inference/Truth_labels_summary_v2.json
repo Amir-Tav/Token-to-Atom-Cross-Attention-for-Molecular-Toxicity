@@ -1,0 +1,334 @@
+{
+  "fbeta15": {
+    "mode": "fbeta15",
+    "micro": {
+      "precision": 0.703125,
+      "recall": 0.8181818181818182,
+      "f1": 0.7563025210084033
+    },
+    "macro_f1": 0.7053535353535354,
+    "per_label": [
+      {
+        "label": "NR-AR",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AR-LBD",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AhR",
+        "precision": 0.8888888888888888,
+        "recall": 0.7272727272727273,
+        "f1": 0.7999999999999999
+      },
+      {
+        "label": "NR-Aromatase",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "NR-ER",
+        "precision": 0.9090909090909091,
+        "recall": 0.9090909090909091,
+        "f1": 0.9090909090909091
+      },
+      {
+        "label": "NR-ER-LBD",
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "NR-PPAR-gamma",
+        "precision": 0.3333333333333333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      {
+        "label": "SR-ARE",
+        "precision": 0.75,
+        "recall": 0.8571428571428571,
+        "f1": 0.7999999999999999
+      },
+      {
+        "label": "SR-ATAD5",
+        "precision": 0.5714285714285714,
+        "recall": 0.8,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "SR-HSE",
+        "precision": 0.3333333333333333,
+        "recall": 0.6666666666666666,
+        "f1": 0.4444444444444444
+      },
+      {
+        "label": "SR-MMP",
+        "precision": 0.875,
+        "recall": 1.0,
+        "f1": 0.9333333333333333
+      },
+      {
+        "label": "SR-p53",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      }
+    ]
+  },
+  "f1": {
+    "mode": "f1",
+    "micro": {
+      "precision": 0.7407407407407407,
+      "recall": 0.7272727272727273,
+      "f1": 0.7339449541284404
+    },
+    "macro_f1": 0.7597222222222223,
+    "per_label": [
+      {
+        "label": "NR-AR",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AR-LBD",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AhR",
+        "precision": 1.0,
+        "recall": 0.6363636363636364,
+        "f1": 0.7777777777777778
+      },
+      {
+        "label": "NR-Aromatase",
+        "precision": NaN,
+        "recall": 0.0,
+        "f1": NaN
+      },
+      {
+        "label": "NR-ER",
+        "precision": 1.0,
+        "recall": 0.8181818181818182,
+        "f1": 0.9
+      },
+      {
+        "label": "NR-ER-LBD",
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "NR-PPAR-gamma",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "SR-ARE",
+        "precision": 0.75,
+        "recall": 0.8571428571428571,
+        "f1": 0.7999999999999999
+      },
+      {
+        "label": "SR-ATAD5",
+        "precision": 0.5714285714285714,
+        "recall": 0.8,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "SR-HSE",
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": NaN
+      },
+      {
+        "label": "SR-MMP",
+        "precision": 0.875,
+        "recall": 1.0,
+        "f1": 0.9333333333333333
+      },
+      {
+        "label": "SR-p53",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      }
+    ]
+  },
+  "f1_soft": {
+    "mode": "f1_soft",
+    "micro": {
+      "precision": 0.7049180327868853,
+      "recall": 0.7818181818181819,
+      "f1": 0.7413793103448276
+    },
+    "macro_f1": 0.7026345324590939,
+    "per_label": [
+      {
+        "label": "NR-AR",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AR-LBD",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AhR",
+        "precision": 0.875,
+        "recall": 0.6363636363636364,
+        "f1": 0.7368421052631579
+      },
+      {
+        "label": "NR-Aromatase",
+        "precision": NaN,
+        "recall": 0.0,
+        "f1": NaN
+      },
+      {
+        "label": "NR-ER",
+        "precision": 0.9090909090909091,
+        "recall": 0.9090909090909091,
+        "f1": 0.9090909090909091
+      },
+      {
+        "label": "NR-ER-LBD",
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "NR-PPAR-gamma",
+        "precision": 0.3333333333333333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      {
+        "label": "SR-ARE",
+        "precision": 0.75,
+        "recall": 0.8571428571428571,
+        "f1": 0.7999999999999999
+      },
+      {
+        "label": "SR-ATAD5",
+        "precision": 0.5714285714285714,
+        "recall": 0.8,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "SR-HSE",
+        "precision": 0.3333333333333333,
+        "recall": 0.6666666666666666,
+        "f1": 0.4444444444444444
+      },
+      {
+        "label": "SR-MMP",
+        "precision": 0.875,
+        "recall": 1.0,
+        "f1": 0.9333333333333333
+      },
+      {
+        "label": "SR-p53",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      }
+    ]
+  },
+  "policy": {
+    "mode": "policy",
+    "micro": {
+      "precision": 0.6909090909090909,
+      "recall": 0.6909090909090909,
+      "f1": 0.6909090909090909
+    },
+    "macro_f1": 0.7388888888888889,
+    "per_label": [
+      {
+        "label": "NR-AR",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AR-LBD",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AhR",
+        "precision": 1.0,
+        "recall": 0.6363636363636364,
+        "f1": 0.7777777777777778
+      },
+      {
+        "label": "NR-Aromatase",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "NR-ER",
+        "precision": 1.0,
+        "recall": 0.8181818181818182,
+        "f1": 0.9
+      },
+      {
+        "label": "NR-ER-LBD",
+        "precision": NaN,
+        "recall": 0.0,
+        "f1": NaN
+      },
+      {
+        "label": "NR-PPAR-gamma",
+        "precision": 0.3333333333333333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      {
+        "label": "SR-ARE",
+        "precision": 0.75,
+        "recall": 0.8571428571428571,
+        "f1": 0.7999999999999999
+      },
+      {
+        "label": "SR-ATAD5",
+        "precision": 0.5714285714285714,
+        "recall": 0.8,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "SR-HSE",
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": NaN
+      },
+      {
+        "label": "SR-MMP",
+        "precision": 0.875,
+        "recall": 1.0,
+        "f1": 0.9333333333333333
+      },
+      {
+        "label": "SR-p53",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      }
+    ]
+  }
+}

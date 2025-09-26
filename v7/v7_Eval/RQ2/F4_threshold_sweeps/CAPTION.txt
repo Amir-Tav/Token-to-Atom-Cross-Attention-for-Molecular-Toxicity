@@ -1,0 +1,1 @@
+Threshold sweeps using BLEND probabilities from RQ1. Vertical dotted lines mark VAL-selected thresholds (th_f1, th_fbeta15) from thresholds_blend_v2.json. Thresholds were frozen before TEST evaluation.

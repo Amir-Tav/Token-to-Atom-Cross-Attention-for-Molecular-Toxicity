@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-09-03T22:41:09.365008Z",
+  "n_rows": 7831,
+  "n_cols": 14,
+  "mol_id_column": "mol_id",
+  "smiles_column": "smiles",
+  "label_columns": [
+    "NR-AR",
+    "NR-AR-LBD",
+    "NR-AhR",
+    "NR-Aromatase",
+    "NR-ER",
+    "NR-ER-LBD",
+    "NR-PPAR-gamma",
+    "SR-ARE",
+    "SR-ATAD5",
+    "SR-HSE",
+    "SR-MMP",
+    "SR-p53"
+  ],
+  "has_duplicates": {
+    "mol_id": false,
+    "smiles": false
+  }
+}

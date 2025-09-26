@@ -1,0 +1,19 @@
+{
+  "macro_AP": 0.35268598159465986,
+  "micro_AP": 0.30262822060390315,
+  "macro_ROC_AUC": 0.8077595094240683,
+  "labels": [
+    "NR-AR",
+    "NR-AR-LBD",
+    "NR-AhR",
+    "NR-Aromatase",
+    "NR-ER",
+    "NR-ER-LBD",
+    "NR-PPAR-gamma",
+    "SR-ARE",
+    "SR-ATAD5",
+    "SR-HSE",
+    "SR-MMP",
+    "SR-p53"
+  ]
+}

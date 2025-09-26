@@ -1,0 +1,28 @@
+{
+  "B": 1000,
+  "seed": 1337,
+  "macro_AP": {
+    "mean": 0.3550903075852152,
+    "ci_lo": 0.3356363976962386,
+    "ci_hi": 0.37405163574003764
+  },
+  "micro_AP": {
+    "mean": 0.3030620930889132,
+    "ci_lo": 0.28743722786078224,
+    "ci_hi": 0.31888639014839404
+  },
+  "labels": [
+    "NR-AR",
+    "NR-AR-LBD",
+    "NR-AhR",
+    "NR-Aromatase",
+    "NR-ER",
+    "NR-ER-LBD",
+    "NR-PPAR-gamma",
+    "SR-ARE",
+    "SR-ATAD5",
+    "SR-HSE",
+    "SR-MMP",
+    "SR-p53"
+  ]
+}

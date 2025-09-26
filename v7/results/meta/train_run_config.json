@@ -1,0 +1,27 @@
+{
+  "batch_size": 32,
+  "grad_accum": 4,
+  "use_amp": true,
+  "max_epochs": {
+    "stage_a": 8,
+    "stage_b": 20
+  },
+  "optimizer": {
+    "lr": 0.0003,
+    "weight_decay": 0.01
+  },
+  "scheduler": {
+    "type": "warmup_cosine",
+    "warmup_ratio": 0.1
+  },
+  "asl": {
+    "gamma_neg": 5.0,
+    "gamma_pos": 1.0,
+    "clip": 0.05
+  },
+  "ema_decay": 0.999,
+  "unfreeze_last_n": 2,
+  "early_stop_patience": 5,
+  "clip_norm": 1.0,
+  "num_workers": 0
+}

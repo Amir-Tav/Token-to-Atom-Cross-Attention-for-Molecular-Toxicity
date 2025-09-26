@@ -1,0 +1,7 @@
+{
+  "torch_version": "2.6.0+cu124",
+  "cuda_available": true,
+  "cuda_version": "12.4",
+  "device_name": "NVIDIA GeForce RTX 4070 Ti",
+  "total_vram_gb": 11.99
+}

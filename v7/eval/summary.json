@@ -1,0 +1,17 @@
+{
+  "eval_mode": "blend",
+  "threshold_mode": "fbeta15",
+  "n_test": 783,
+  "macro_pr_auc": 0.2179368491745162,
+  "macro_roc_auc": 0.7544820729548566,
+  "micro_precision": 0.2006872852233677,
+  "micro_recall": 0.5793650793650794,
+  "micro_f1": 0.29811128126595204,
+  "avg_true_cardinality": 0.6436781609195402,
+  "avg_pred_cardinality": 1.8582375478927202,
+  "cardinality_error": 1.21455938697318,
+  "plots": {
+    "pr_curves_dir": "v7\\eval\\plots\\pr",
+    "reliability_dir": "v7\\eval\\plots\\reliability"
+  }
+}

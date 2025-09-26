@@ -1,0 +1,5 @@
+batch_size,forward_fp32_s_per_batch,forward_amp_s_per_batch,trainstep_fp32_s,trainstep_amp_s,approx_samples_per_s_fp32,approx_samples_per_s_amp,peak_mem_gb
+8,0.006,0.0068,0.0507,0.0336,1336.46,1179.99,0.87
+16,0.01,0.0095,0.0349,0.0291,1601.43,1685.39,0.88
+24,0.0134,0.0125,0.0439,0.04,1786.3,1921.18,0.98
+32,0.0167,0.0133,0.0529,0.0462,1918.94,2401.42,1.24

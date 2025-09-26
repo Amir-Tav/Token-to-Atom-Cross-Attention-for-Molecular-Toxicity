@@ -1,0 +1,29 @@
+{
+  "macro_AP": 0.269198130665811,
+  "micro_AP": 0.20618289058037828,
+  "macro_precision": 0.2906481024114364,
+  "macro_recall": 0.5140260291883009,
+  "macro_specificity": 0.8313932380079586,
+  "macro_accuracy": 0.8193227230764325,
+  "macro_f1": 0.29141941862073295,
+  "threshold_mode": "fbeta15",
+  "observed_entries": 7771,
+  "positives_total": 470,
+  "val_indices_source": "D:\\Coding Projects\\Predicting-Drug-Response-Using-Multi-Omics-Data-with-XAI\\v7\\data\\splits\\val.npy",
+  "aligned_to_indices": true,
+  "macro_ROC_AUC": 0.7178759777863407,
+  "labels": [
+    "NR-AR",
+    "NR-AR-LBD",
+    "NR-AhR",
+    "NR-Aromatase",
+    "NR-ER",
+    "NR-ER-LBD",
+    "NR-PPAR-gamma",
+    "SR-ARE",
+    "SR-ATAD5",
+    "SR-HSE",
+    "SR-MMP",
+    "SR-p53"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "seed": 42,
+  "N_total": 7831,
+  "sizes": {
+    "train": 6265,
+    "val": 783,
+    "test": 783
+  },
+  "targets": {
+    "train": 6265,
+    "val": 783,
+    "test": 783
+  },
+  "paths": {
+    "train_idx": "v7\\data\\splits\\train.npy",
+    "val_idx": "v7\\data\\splits\\val.npy",
+    "test_idx": "v7\\data\\splits\\test.npy",
+    "scaffold_meta": "v7\\data\\splits\\scaffold_split.csv",
+    "label_distribution": "v7\\data\\splits\\label_distribution.csv"
+  }
+}

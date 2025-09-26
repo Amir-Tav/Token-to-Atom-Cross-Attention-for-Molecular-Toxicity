@@ -1,0 +1,251 @@
+{
+  "fbeta15": {
+    "mode": "fbeta15",
+    "micro": {
+      "precision": 0.625,
+      "recall": 0.8333333333333334,
+      "f1": 0.7142857142857143
+    },
+    "macro_f1": 0.7833333333333333,
+    "per_label": [
+      {
+        "label": "NR-AR",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AR-LBD",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AhR",
+        "precision": 0.5,
+        "recall": 0.5,
+        "f1": 0.5
+      },
+      {
+        "label": "NR-Aromatase",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-ER",
+        "precision": 0.6666666666666666,
+        "recall": 1.0,
+        "f1": 0.8
+      },
+      {
+        "label": "NR-ER-LBD",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "NR-PPAR-gamma",
+        "precision": 0.3333333333333333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      {
+        "label": "SR-ARE",
+        "precision": 1.0,
+        "recall": 0.6666666666666666,
+        "f1": 0.8
+      },
+      {
+        "label": "SR-ATAD5",
+        "precision": 0.0,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "SR-HSE",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "SR-MMP",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "SR-p53",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    ]
+  },
+  "f1": {
+    "mode": "f1",
+    "micro": {
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75
+    },
+    "macro_f1": 0.8285714285714286,
+    "per_label": [
+      {
+        "label": "NR-AR",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AR-LBD",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AhR",
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "NR-Aromatase",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-ER",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "NR-ER-LBD",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "NR-PPAR-gamma",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "SR-ARE",
+        "precision": 1.0,
+        "recall": 0.6666666666666666,
+        "f1": 0.8
+      },
+      {
+        "label": "SR-ATAD5",
+        "precision": 0.0,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "SR-HSE",
+        "precision": NaN,
+        "recall": 0.0,
+        "f1": NaN
+      },
+      {
+        "label": "SR-MMP",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "SR-p53",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    ]
+  },
+  "policy": {
+    "mode": "policy",
+    "micro": {
+      "precision": 0.6666666666666666,
+      "recall": 0.6666666666666666,
+      "f1": 0.6666666666666666
+    },
+    "macro_f1": 0.7722222222222221,
+    "per_label": [
+      {
+        "label": "NR-AR",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AR-LBD",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-AhR",
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "NR-Aromatase",
+        "precision": NaN,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "NR-ER",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "NR-ER-LBD",
+        "precision": NaN,
+        "recall": 0.0,
+        "f1": NaN
+      },
+      {
+        "label": "NR-PPAR-gamma",
+        "precision": 0.3333333333333333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      {
+        "label": "SR-ARE",
+        "precision": 1.0,
+        "recall": 0.6666666666666666,
+        "f1": 0.8
+      },
+      {
+        "label": "SR-ATAD5",
+        "precision": 0.0,
+        "recall": NaN,
+        "f1": NaN
+      },
+      {
+        "label": "SR-HSE",
+        "precision": NaN,
+        "recall": 0.0,
+        "f1": NaN
+      },
+      {
+        "label": "SR-MMP",
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      },
+      {
+        "label": "SR-p53",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    ]
+  }
+}

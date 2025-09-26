@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-09-03T22:42:29.989761Z",
+  "n_total": 7831,
+  "n_features": 208,
+  "labels": [
+    "NR-AR",
+    "NR-AR-LBD",
+    "NR-AhR",
+    "NR-Aromatase",
+    "NR-ER",
+    "NR-ER-LBD",
+    "NR-PPAR-gamma",
+    "SR-ARE",
+    "SR-ATAD5",
+    "SR-HSE",
+    "SR-MMP",
+    "SR-p53"
+  ],
+  "artifacts": {
+    "prepared_dir": "v7\\data\\prepared",
+    "train_npz": "v7\\data\\prepared\\train.npz",
+    "val_npz": "v7\\data\\prepared\\val.npz",
+    "test_npz": "v7\\data\\prepared\\test.npz",
+    "imputer_train": "v7\\data\\descriptors\\imputer_train.joblib",
+    "scaler_train": "v7\\data\\descriptors\\scaler_train.joblib",
+    "splits_dir": "v7\\data\\splits",
+    "descriptors_dir": "v7\\data\\descriptors",
+    "raw_descriptors": "v7\\data\\descriptors\\X_rdkit_raw.npy"
+  },
+  "splits": {
+    "train": {
+      "size": 6265
+    },
+    "val": {
+      "size": 783
+    },
+    "test": {
+      "size": 783
+    }
+  }
+}

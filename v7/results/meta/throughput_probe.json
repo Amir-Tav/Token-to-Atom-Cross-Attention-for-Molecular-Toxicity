@@ -1,0 +1,42 @@
+[
+  {
+    "batch_size": 8,
+    "forward_fp32_s_per_batch": 0.006,
+    "forward_amp_s_per_batch": 0.0068,
+    "trainstep_fp32_s": 0.0507,
+    "trainstep_amp_s": 0.0336,
+    "approx_samples_per_s_fp32": 1336.46,
+    "approx_samples_per_s_amp": 1179.99,
+    "peak_mem_gb": 0.87
+  },
+  {
+    "batch_size": 16,
+    "forward_fp32_s_per_batch": 0.01,
+    "forward_amp_s_per_batch": 0.0095,
+    "trainstep_fp32_s": 0.0349,
+    "trainstep_amp_s": 0.0291,
+    "approx_samples_per_s_fp32": 1601.43,
+    "approx_samples_per_s_amp": 1685.39,
+    "peak_mem_gb": 0.88
+  },
+  {
+    "batch_size": 24,
+    "forward_fp32_s_per_batch": 0.0134,
+    "forward_amp_s_per_batch": 0.0125,
+    "trainstep_fp32_s": 0.0439,
+    "trainstep_amp_s": 0.04,
+    "approx_samples_per_s_fp32": 1786.3,
+    "approx_samples_per_s_amp": 1921.18,
+    "peak_mem_gb": 0.98
+  },
+  {
+    "batch_size": 32,
+    "forward_fp32_s_per_batch": 0.0167,
+    "forward_amp_s_per_batch": 0.0133,
+    "trainstep_fp32_s": 0.0529,
+    "trainstep_amp_s": 0.0462,
+    "approx_samples_per_s_fp32": 1918.94,
+    "approx_samples_per_s_amp": 2401.42,
+    "peak_mem_gb": 1.24
+  }
+]

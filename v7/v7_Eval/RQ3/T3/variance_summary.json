@@ -1,0 +1,6 @@
+{
+  "specialist_var": 0.00026,
+  "blend_var": 9.8e-05,
+  "variance_reduction_pct": 62.51,
+  "note": "Variance is computed across seeds (ddof=1)."
+}

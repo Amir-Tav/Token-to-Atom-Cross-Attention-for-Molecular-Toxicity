@@ -1,0 +1,20 @@
+{
+  "seeds": [
+    "seed13",
+    "seed29",
+    "seed47",
+    "seed61",
+    "seed83"
+  ],
+  "macro_AP_shared": 0.37600579857826233,
+  "macro_AP_specialist_mean": 0.3564655125141144,
+  "macro_AP_specialist_sd": 0.016139487679389764,
+  "macro_AP_blend_mean": 0.3727790951728821,
+  "macro_AP_blend_sd": 0.009881515116130245,
+  "macro_AP_specialist_var": 0.00026048306255317395,
+  "macro_AP_blend_var": 9.764434099031051e-05,
+  "variance_reduction_pct": 62.51,
+  "empty_rate_overall_before_mean": 0.007214684756584197,
+  "empty_rate_overall_after_mean": 0.007214684756584197,
+  "stress_test": null
+}

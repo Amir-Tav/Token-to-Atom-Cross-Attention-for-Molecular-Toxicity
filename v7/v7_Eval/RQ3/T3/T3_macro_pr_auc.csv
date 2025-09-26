@@ -1,0 +1,4 @@
+model,macro_AP_mean,macro_AP_sd,macro_AP_var,macro_AP_95CI_lo,macro_AP_95CI_hi
+shared,0.376,0.0,0.0,0.376,0.376
+specialist,0.3565,0.0161,0.0003,0.3423,0.3706
+blend,0.3728,0.0099,0.0001,0.3641,0.3814
